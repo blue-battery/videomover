@@ -4,6 +4,7 @@ import os
 ZOOM_KEY = os.environ['ZOOM_KEY']
 ZOOM_SECRET = os.environ['ZOOM_SECRET']
 
+output_dir = '/home/jingpeng/Download/videomover'
 
 from zoomus import ZoomClient
 import urllib.request
@@ -19,7 +20,7 @@ for user in client.user.list().json()['users']:
     for meeting_record in meeting_records:
 #         print(meeting_record)
         for recording_file in meeting_record['recording_files']:
-            file_name = '/Users/jpwu/Desktop/{}.mp4'.format(recording_file['id'])
+            file_name = '{}/{}.mp4'.format(output_dir, recording_file['id'])
             url = recording_file['download_url']
             urllib.request.urlretrieve(url, file_name)
             print(url)
