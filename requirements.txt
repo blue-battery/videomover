@@ -1,1 +1,6 @@
 zoomus
+youku
+google-cloud
+http
+httplib2
+oauth2client

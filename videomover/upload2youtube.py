@@ -43,7 +43,7 @@ RETRIABLE_STATUS_CODES = [500, 502, 503, 504]
 # For more information about the client_secrets.json file format, see:
 #   https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
 from os.path import expanduser
-CLIENT_SECRETS_FILE = "{}/.pcces.google.json".format( expanduser("~") )
+CLIENT_SECRETS_FILE = "{}/.google.secret.json".format( expanduser("~") )
 
 # This OAuth 2.0 access scope allows an application to upload files to the
 # authenticated user's YouTube channel, but doesn't allow other types of access.
