@@ -4,6 +4,7 @@ import os
 
 from zoomus import ZoomClient
 import urllib.request
+import upload2youku
 
 def download_zoom_video(
         output_dir  = '/tmp',
@@ -24,10 +25,12 @@ def download_zoom_video(
                         recording_file['recording_start'], topic)
                 url = recording_file['download_url']
                 print(url)
+                title = os.path.basename(file_name)
                 if recording_file['file_type'] == 'MP4':
                     urllib.request.urlretrieve(url, file_name)
                     os.system("python ./upload2youtube.py --file \"{}\" --title \"{}\"".format(
-                        file_name, os.path.basename(file_name)))
+                        file_name, title ))
+                    upload2youku.upload( file_name, title )
                 # delete uploaded video in Zoom cloud
                 client.recording.delete(
                         meeting_id  = recording_file['meeting_id'],
@@ -51,5 +54,7 @@ if __name__ == '__main__':
             help    = "value of zoom.us credential for download permission")
     args = parser.parse_args()
     while True:
+        print("trying to download and upload...")
         download_zoom_video( args.outputdir, args.zoomkey, args.zoomvalue )
+        print("sleep for {} minutes ...".format( args.sleeptime ))
         time.sleep( args.sleeptime * 60 )

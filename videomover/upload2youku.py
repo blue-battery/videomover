@@ -3,15 +3,15 @@
 from youku import YoukuUpload
 import os
 CLIENT_ID       = os.environ['YOUKU_CLIENT_ID']
-ACCESS_TOKEN    = os.environ['YOUKU_ACCESS_TOKEN']
+CLIENT_SECRET    = os.environ['YOUKU_CLIENT_SECRET']
 
-def upload2youku( filename, title, tags='PCCES', description = 'video of PCCES, pcces.org' ):
+def upload( filename, title, tags='PCCES', description = 'video of PCCES, pcces.org' ):
     file_info = {
         'title'         : title,
         'tags'          : tags,
         'description'   : description
     }
-    youku = YoukuUpload(CLIENT_ID, ACCESS_TOKEN, filename)
+    youku = YoukuUpload(CLIENT_ID, CLIENT_SECRET, filename)
     youku.upload( file_info )
 
 if __name__ == '__main__':
@@ -22,5 +22,5 @@ if __name__ == '__main__':
     parser.add_argument("--title", "-t",
         default = "PCCES")
     args = parser.parse_args()
-    upload2youku( args.filename, args.title )
+    upload( args.filename, args.title )
 
