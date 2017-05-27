@@ -1,5 +1,5 @@
 # videomover
-move recording files from Zoom.us to local server, and Youtube.
+Since the cloud storage of Zoom.us is pretty limited, and manually downloading and uploading to video websites is tedious. This package aims to solve this problem. It moves recording files from Zoom.us to a storage space, such as local server, Youtube, and YouKu.
 
 # Installation
 this package was tested using python3.6, all python3 version should be fine.
@@ -32,3 +32,7 @@ https://developers.google.com/youtube/v3/code_samples/python#upload_a_video
 
 ### python code sample
 https://github.com/youtube/api-samples/tree/master/python
+
+## Youku 
+python SDK
+https://github.com/hanguokai/youku
