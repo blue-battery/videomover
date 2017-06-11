@@ -28,8 +28,8 @@ def download_zoom_video(
                 title = os.path.basename(file_name)
                 if recording_file['file_type'] == 'MP4':
                     urllib.request.urlretrieve(url, file_name)
-		    print("donwload complete, start uploading to {}".format(title))
-                    os.system("python ./upload2youtube.py --file \"{}\" --title \"{}\" --noauth_local_webserver".format(
+                    print("donwload complete, start uploading to {}".format(title))
+                    os.system("python ./upload2youtube.py --file \"{}\" --title \"{}\" --noauth_local_webserver --privacyStatus unlisted".format(
                         file_name, title ))
                     #upload2youku.upload( file_name, title )
                 # delete uploaded video in Zoom cloud
