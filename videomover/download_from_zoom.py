@@ -15,8 +15,8 @@ def download_zoom_video(
         user_id = user['id']
         # meeting_list = client.meeting.list( host_id = user_id )
         recording_list = client.recording.list( host_id = user_id )
-        meeting_records = recording_list.json()['meetings']
-        for meeting_record in meeting_records:
+        print("recording list: {}".format(recording_list))
+        for meeting_record in recording_list.json()['meetings']:
             print(meeting_record)
             topic = meeting_record['topic']
             print("meeting topic: {}".format(topic))
@@ -27,11 +27,12 @@ def download_zoom_video(
                 print("download {} to {}".format(url, file_name))
                 title = os.path.basename(file_name)
                 if recording_file['file_type'] == 'MP4':
+                    print("start downloading ...")
                     urllib.request.urlretrieve(url, file_name)
-                    print("donwload complete, start uploading to {}".format(title))
-                    os.system("python ./upload2youtube.py --file \"{}\" --title \"{}\" --noauth_local_webserver --privacyStatus unlisted".format(
-                        file_name, title ))
-                    #upload2youku.upload( file_name, title )
+                    if os.path.getsize(file_name) > 10000000: # 10 MB
+                        print("donwload complete, start uploading to {}".format(title))
+                        os.system("python ./upload2youtube.py --file \"{}\" --title \"{}\" --noauth_local_webserver --privacyStatus unlisted".format( file_name, title ))
+                        #upload2youku.upload( file_name, title )
                 # delete uploaded video in Zoom cloud
                 client.recording.delete(
                         meeting_id  = recording_file['meeting_id'],
