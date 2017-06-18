@@ -14,9 +14,11 @@ def download_zoom_video(
     for user in client.user.list().json()['users']:
         user_id = user['id']
         # meeting_list = client.meeting.list( host_id = user_id )
-        recording_list = client.recording.list( host_id = user_id )
+        recording_list = client.recording.list( host_id = user_id ).json()
         print("recording list: {}".format(recording_list))
-        for meeting_record in recording_list.json()['meetings']:
+        if 'meetings' not in recording_list:
+            continue
+        for meeting_record in recording_list['meetings']:
             print(meeting_record)
             topic = meeting_record['topic']
             print("meeting topic: {}".format(topic))
