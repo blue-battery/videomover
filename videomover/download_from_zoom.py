@@ -28,7 +28,7 @@ def download_zoom_video(
                 url = recording_file['download_url']
                 print("download {} to {}".format(url, file_name))
                 title = os.path.basename(file_name)
-                if recording_file['file_type'] == 'MP4':
+                if recording_file['file_size']>1000000 and recording_file['file_type'] == 'MP4':
                     print("start downloading ...")
                     urllib.request.urlretrieve(url, file_name)
                     if os.path.getsize(file_name) > 10000000: # 10 MB
